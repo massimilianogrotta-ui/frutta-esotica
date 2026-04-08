@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frutta Esotica nel Mondo — Massimiliano Grotta</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --ocean: #1A3A5C;
+    --teal: #0D7377;
+    --teal-light: #14A09E;
+    --electric: #14FFEC;
+    --amber: #F5A623;
+    --amber-light: #FFD080;
+    --off-white: #F4F6F0;
+    --gray: #8892A4;
+    --dark: #0D1117;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(13,115,119,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(20,255,236,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Animated grid lines */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(13,115,119,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,115,119,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid rgba(13,115,119,0.2);
+  }
+
+  .nav-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-brand span { color: var(--electric); }
+
+  .nav-cta {
+    background: var(--teal);
+    color: var(--white);
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 5% 3rem;
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(13,115,119,0.2);
+    border: 1px solid rgba(20,255,236,0.25);
+    color: var(--electric);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--electric);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    animation: fadeInUp 0.6s 0.1s ease both;
+  }
+
+  h1 .accent { color: var(--electric); }
+  h1 .line2 { color: var(--white); }
+  h1 .line3 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.4);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.6);
+    margin: 1.5rem 0 0.75rem;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px;
+    animation: fadeInUp 0.6s 0.2s ease both;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.6s 0.25s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--electric);
+    color: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 0 30px rgba(20,255,236,0.25);
+  }
+
+  .btn-primary:hover {
+    background: var(--amber-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(20,255,236,0.3);
+  }
+
+  .btn-primary .price {
+    background: var(--navy);
+    color: var(--electric);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .btn-secondary {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--white); }
+
+  .hero-proof {
+    padding: 2rem 5%;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s 0.4s ease both;
+  }
+
+  .proof-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .proof-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--electric);
+    line-height: 1;
+  }
+
+  .proof-label {
+    font-size: 0.78rem;
+    color: var(--gray);
+    line-height: 1.3;
+    max-width: 90px;
+  }
+
+  .proof-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.1);
+    align-self: center;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── AUTHOR STRIP ── */
+  .author-strip {
+    background: var(--ocean);
+    padding: 2.5rem 5%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .author-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--white);
+    flex-shrink: 0;
+    border: 2px solid var(--electric);
+  }
+
+  .author-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+
+  .author-info p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .author-badges {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+
+  .badge {
+    background: rgba(13,115,119,0.25);
+    border: 1px solid rgba(13,115,119,0.5);
+    color: var(--electric);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 5%; }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  h2 em {
+    font-style: normal;
+    color: var(--teal);
+  }
+
+  .section-intro {
+    font-size: 1.05rem;
+    color: #556;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 3rem;
+  }
+
+  /* ── PROBLEM SECTION ── */
+  .problem {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .problem h2 { color: var(--white); }
+  .problem h2 em { color: var(--electric); }
+  .problem .section-intro { color: rgba(255,255,255,0.5); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .problem-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--teal);
+  }
+
+  .problem-card .icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .problem-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .problem-card p {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  /* ── WHAT YOU GET ── */
+  .contents { background: var(--off-white); }
+
+  .chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .chapter-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chapter-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .chapter-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--electric));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .chapter-card:hover::after { transform: scaleX(1); }
+
+  .chapter-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+
+  .chapter-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .chapter-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .chapter-bullets li {
+    font-size: 0.85rem;
+    color: #667;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .chapter-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-size: 0.7rem;
+    top: 1px;
+  }
+
+  /* ── FOR WHOM ── */
+  .for-whom { background: var(--white); }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .audience-col h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid;
+  }
+
+  .audience-col.yes h3 { color: var(--teal); border-color: var(--teal); }
+  .audience-col.no h3 { color: #cc4444; border-color: #cc4444; }
+
+  .audience-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .audience-list li {
+    font-size: 0.9rem;
+    color: #445;
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .audience-list li .check { flex-shrink: 0; margin-top: 2px; }
+  .yes .check { color: var(--teal); }
+  .no .check { color: #cc4444; }
+
+  /* ── CASE STUDIES ── */
+  .cases { background: var(--off-white); }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .case-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.75rem;
+    border-left: 4px solid var(--amber);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+
+  .case-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.6rem;
+  }
+
+  .case-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .case-card p {
+    font-size: 0.875rem;
+    color: #556;
+    line-height: 1.65;
+  }
+
+  .case-lesson {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.8rem;
+    color: var(--teal);
+    font-weight: 500;
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-start;
+  }
+
+  /* ── PRICING ── */
+  .pricing {
+    background: var(--navy);
+    text-align: center;
+  }
+
+  .pricing h2 { color: var(--white); }
+  .pricing h2 em { color: var(--electric); }
+
+  .price-card {
+    max-width: 480px;
+    margin: 3rem auto 0;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(20,255,236,0.2);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--electric));
+  }
+
+  .price-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .price-main {
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .price-main sup {
+    font-size: 2rem;
+    vertical-align: top;
+    margin-top: 0.8rem;
+    display: inline-block;
+    color: var(--electric);
+  }
+
+  .price-note {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+  }
+
+  .price-includes {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+  }
+
+  .price-includes li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .price-includes li .tick {
+    color: var(--electric);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .btn-buy {
+    display: block;
+    background: var(--electric);
+    color: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    padding: 1.1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 0 40px rgba(20,255,236,0.2);
+    margin-bottom: 1rem;
+  }
+
+  .btn-buy:hover {
+    background: var(--amber-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 50px rgba(20,255,236,0.3);
+  }
+
+  .price-guarantee {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  /* ── PLATFORM TIP ── */
+  .platform-tip {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(20,255,236,0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .platform-tip h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+
+  .platform-tip p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  .platform-tip strong { color: rgba(255,255,255,0.7); }
+
+  /* ── FAQ ── */
+  .faq { background: var(--off-white); }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .faq-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+  }
+
+  .faq-item p {
+    font-size: 0.875rem;
+    color: #556;
+    line-height: 1.65;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--teal);
+    padding: 5rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(20,255,236,0.1) 0%, transparent 70%);
+  }
+
+  .final-cta h2 {
+    color: var(--white);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .final-cta p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  .final-cta .btn-primary { position: relative; margin: 0 auto; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--electric); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .audience-grid { grid-template-columns: 1fr; }
+    .hero-proof { gap: 1.5rem; }
+    .author-badges { margin-left: 0; }
+    h1 { font-size: 2.8rem; }
+    .price-main { font-size: 4rem; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <nav>
+    <div class="nav-brand">FRUTTA ESOTICA <span>NEL MONDO</span></div>
+    <a href="https://grottamass.gumroad.com/l/dtmpll" target="_blank" class="nav-cta">Acquista — €27</a>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-badge">Guida Pratica al Commercio Internazionale</div>
+
+    <h1>
+      <span class="accent">FRUTTA</span><br>
+      <span class="line2">ESOTICA</span><br>
+      <span class="line3">NEL MONDO</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      La guida pratica per entrare nel commercio internazionale di frutta esotica e tropicale — scritta da chi ha lavorato 10 anni in Dole, fatto trading su tre continenti e gestito produzioni dirette di banane in Ecuador.
+    </p>
+
+    <p class="hero-tagline">
+      Dalla prima trattativa alla consegna — tutto ciò che devi sapere per iniziare.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://grottamass.gumroad.com/l/dtmpll" target="_blank" class="btn-primary">
+        Scarica l'ebook <span class="price">€27</span>
+      </a>
+      <a href="#contenuti" class="btn-secondary">
+        ↓ Scopri cosa contiene
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-proof">
+    <div class="proof-item">
+      <div class="proof-num">10+</div>
+      <div class="proof-label">anni in Dole Food Company</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-num">3</div>
+      <div class="proof-label">continenti operativi</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-num">6</div>
+      <div class="proof-label">capitoli operativi</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-num">100%</div>
+      <div class="proof-label">esperienza diretta sul campo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AUTHOR ── -->
+<div class="author-strip reveal">
+  <div class="author-avatar">MG</div>
+  <div class="author-info">
+    <h3>Massimiliano Grotta</h3>
+    <p>Ex Dole Food Company · International Fruit Trader · Producer-Exporter Ecuador (Grobandeli)</p>
+  </div>
+  <div class="author-badges">
+    <span class="badge">Dole 2003–2013</span>
+    <span class="badge">Ecuador</span>
+    <span class="badge">Europa · Africa · Asia</span>
+  </div>
+</div>
+
+<!-- ── PROBLEM ── -->
+<section class="problem">
+  <div class="section-label">Il problema</div>
+  <h2>Il settore è <em>complesso</em>.<br>Le informazioni pratiche non esistono.</h2>
+  <p class="section-intro">
+    Chiunque voglia entrare nel commercio internazionale di frutta esotica si trova davanti un muro: teorie accademiche, consulenti costosi, e nessuna guida operativa scritta da chi lo fa davvero.
+  </p>
+
+  <div class="problem-grid">
+    <div class="problem-card reveal">
+      <div class="icon">🔍</div>
+      <h4>Filiera opaca</h4>
+      <p>Chi fa cosa, dove si formano i margini, come inserirsi — informazioni che si trovano solo dopo anni sul campo.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="icon">🌍</div>
+      <h4>Mercati diversissimi</h4>
+      <p>Africa, Sud America, Asia — ognuno con logiche, rischi e dinamiche commerciali completamente diverse.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="icon">📋</div>
+      <h4>Documentazione minata</h4>
+      <p>Un documento sbagliato blocca il container in dogana. I costi di demurrage e detention si accumulano ogni giorno.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="icon">💸</div>
+      <h4>Costi nascosti ovunque</h4>
+      <p>Chi inizia calcola il margine su prezzo di acquisto e vendita. Poi arriva il conto finale e sparisce tutto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTENTS ── -->
+<section class="contents" id="contenuti">
+  <div class="section-label">Cosa contiene</div>
+  <h2>6 capitoli. <em>Zero teoria.</em><br>Solo quello che serve davvero.</h2>
+  <p class="section-intro">
+    Ogni capitolo è costruito su esperienza diretta — episodi reali, numeri reali, lezioni imparate a caro prezzo.
+  </p>
+
+  <div class="chapters-grid">
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Introduzione</div>
+      <h4>Chi sono e perché fidarti</h4>
+      <ul class="chapter-bullets">
+        <li>10 anni in Dole Food Company</li>
+        <li>Trading su tre continenti</li>
+        <li>Produzione diretta di banane in Ecuador</li>
+        <li>Il mercato globale oggi: numeri e opportunità</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Capitolo 1</div>
+      <h4>Capire la Filiera</h4>
+      <ul class="chapter-bullets">
+        <li>Dal campo alla tavola: i 5 attori chiave</li>
+        <li>Dove si formano i margini — e dove si perdono</li>
+        <li>I 3 punti di ingresso realistici per chi inizia</li>
+        <li>Come scegliere il tuo ruolo nella filiera</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Capitolo 2</div>
+      <h4>I Mercati Geografici</h4>
+      <ul class="chapter-bullets">
+        <li>Sud America: Ecuador, Colombia, Perù</li>
+        <li>Africa: opportunità reali e rischi concreti</li>
+        <li>Asia: prodotti di nicchia ad alto valore</li>
+        <li>Europa: hub logistici e canali di vendita</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Capitolo 3</div>
+      <h4>Trovare Fornitori e Compratori</h4>
+      <ul class="chapter-bullets">
+        <li>Le fiere giuste per ogni prodotto e stagionalità</li>
+        <li>Il Foro AEBE in Ecuador: cosa devi sapere</li>
+        <li>Come valutare un fornitore prima di comprare</li>
+        <li>Trovare i primi compratori in Europa</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Capitolo 4</div>
+      <h4>Logistica e Documenti</h4>
+      <ul class="chapter-bullets">
+        <li>Container reefer: temperature e tempi per rotta</li>
+        <li>I 6 documenti essenziali e come gestirli</li>
+        <li>Incoterms spiegati semplicemente</li>
+        <li>La catena del freddo e il termografo GPS</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Capitolo 5</div>
+      <h4>Negoziazione e Pricing</h4>
+      <ul class="chapter-bullets">
+        <li>Demurrage e detention: cosa sono e quanto costano</li>
+        <li>Il modello completo di pricing con tutti i costi</li>
+        <li>Gestire il rischio di pagamento e valutario</li>
+        <li>3 casi studio reali con lezioni operative</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal">
+      <div class="chapter-num">Capitolo 6</div>
+      <h4>Iniziare Concretamente</h4>
+      <ul class="chapter-bullets">
+        <li>7 step per organizzare la prima operazione</li>
+        <li>Gli 8 errori più comuni — e come evitarli</li>
+        <li>Strumenti e risorse utili per iniziare</li>
+        <li>Checklist documentale completa in appendice</li>
+      </ul>
+    </div>
+    <div class="chapter-card reveal" style="border: 1.5px solid var(--teal); background: linear-gradient(135deg, #f0fafa, #fff);">
+      <div class="chapter-num" style="color: var(--amber);">Bonus</div>
+      <h4>Appendice Operativa</h4>
+      <ul class="chapter-bullets">
+        <li>Checklist documentale per ogni spedizione</li>
+        <li>Lista strumenti e piattaforme consigliate</li>
+        <li>Tabella tempi di transito per rotta</li>
+        <li>Modello di pricing completo step-by-step</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOR WHOM ── -->
+<section class="for-whom reveal">
+  <div class="section-label">Per chi è</div>
+  <h2>Questa guida <em>fa per te</em><br>se sei in questa situazione.</h2>
+
+  <div class="audience-grid">
+    <div class="audience-col yes">
+      <h3>✓ È per te se...</h3>
+      <ul class="audience-list">
+        <li><span class="check">✓</span> Vuoi entrare nel commercio internazionale di frutta esotica</li>
+        <li><span class="check">✓</span> Lavori già nel settore e vuoi strutturare meglio le operazioni</li>
+        <li><span class="check">✓</span> Sei un trader, broker o importatore alle prime armi</li>
+        <li><span class="check">✓</span> Vuoi capire come funziona la filiera prima di investire</li>
+        <li><span class="check">✓</span> Hai già qualche contatto nel settore e vuoi monetizzarlo</li>
+        <li><span class="check">✓</span> Cerchi informazioni operative — non teoria accademica</li>
+      </ul>
+    </div>
+    <div class="audience-col no">
+      <h3>✗ Non è per te se...</h3>
+      <ul class="audience-list">
+        <li><span class="check">✗</span> Cerchi uno schema per arricchirti senza lavorare</li>
+        <li><span class="check">✗</span> Non sei disposto a costruire relazioni nel tempo</li>
+        <li><span class="check">✗</span> Vuoi un manuale universitario con teoria astratta</li>
+        <li><span class="check">✗</span> Non hai interesse a capire come funziona davvero la logistica</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section class="cases">
+  <div class="section-label">Dalla pratica reale</div>
+  <h2>Le lezioni che <em>non trovi online.</em></h2>
+  <p class="section-intro">
+    Episodi reali vissuti in prima persona — con nomi cambiati ma dinamiche e numeri autentici.
+  </p>
+
+  <div class="cases-grid">
+    <div class="case-card reveal">
+      <div class="case-tag">📌 Caso Studio 1</div>
+      <h4>Porto chiuso per sciopero — Salonicco</h4>
+      <p>Container di banane da Guayaquil diretto a Salonicco. La notizia dello sciopero portuale arriva quando la nave è già in mezzo all'Atlantico. Nessun preavviso, nessuna possibilità di bloccare la spedizione.</p>
+      <div class="case-lesson">→ Come abbiamo dirottato il carico e recuperato il margine grazie a una rete di clienti costruita nel tempo.</div>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-tag">📌 Caso Studio 2</div>
+      <h4>La guerra in Ucraina e il crollo del mercato</h4>
+      <p>Febbraio 2022: prezzi crollati e contratti cancellati dall'oggi al domani in tutta l'Europa orientale. Merce in viaggio, cliente che comunica di non poter più ritirare il carico.</p>
+      <div class="case-lesson">→ La strategia che abbiamo sviluppato per proteggerci in futuro: volumi limitati e anticipi nei periodi a rischio.</div>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-tag">📌 Caso Studio 3</div>
+      <h4>Il cliente che non paga — e cosa fare</h4>
+      <p>Il prezzo di mercato crolla. Il cliente diventa irreperibile. La merce è già arrivata al porto e ogni giorno che passa genera demurrage, deterioramento, perdite reali.</p>
+      <div class="case-lesson">→ La regola operativa che ho imparato: attiva il piano B subito, non aspettare. Il tempo è sempre contro di te.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="pricing" id="acquista">
+  <div class="section-label" style="color: var(--teal-light);">Acquista</div>
+  <h2>Un investimento da <em>€27</em>.<br>Una mappa per un settore da miliardi.</h2>
+
+  <div class="price-card reveal">
+    <div class="price-label">Accesso immediato · PDF scaricabile</div>
+    <div class="price-main"><sup>€</sup>27</div>
+    <div class="price-note">Pagamento unico · Nessun abbonamento</div>
+
+    <ul class="price-includes">
+      <li><span class="tick">✓</span> Guida completa in PDF — 6 capitoli + appendice</li>
+      <li><span class="tick">✓</span> Modello di pricing completo con tutti i costi reali</li>
+      <li><span class="tick">✓</span> Checklist documentale per ogni operazione</li>
+      <li><span class="tick">✓</span> Tabella tempi di transito per rotta</li>
+      <li><span class="tick">✓</span> 3 casi studio reali con lezioni operative</li>
+      <li><span class="tick">✓</span> Aggiornamenti futuri inclusi</li>
+    </ul>
+
+    <a href="https://grottamass.gumroad.com/l/dtmpll" target="_blank" class="btn-buy">Acquista ora — €27 →</a>
+
+    <div class="price-guarantee">
+      🔒 Pagamento sicuro · Download immediato
+    </div>
+  </div>
+
+  <div class="platform-tip reveal">
+    <h4>💡 Consiglio sulla piattaforma di vendita</h4>
+    <p>
+      Per vendere questo ebook ti consiglio <strong>Gumroad</strong> — è gratuito da configurare, accetta pagamenti internazionali, invia automaticamente il PDF dopo l'acquisto e ti permette di offrire codici sconto. Alternativa: <strong>Lemon Squeezy</strong>, più moderno e con commissioni leggermente più basse. Entrambi funzionano senza bisogno di un sito web.
+    </p>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq reveal">
+  <div class="section-label">Domande frequenti</div>
+  <h2>Hai ancora <em>dubbi?</em></h2>
+
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h4>Devo già lavorare nel settore per beneficiarne?</h4>
+      <p>No. La guida è strutturata per essere utile sia a chi parte da zero che a chi ha già qualche esperienza. I primi capitoli costruiscono le basi; quelli successivi approfondiscono aspetti operativi che anche i professionisti spesso gestiscono in modo approssimativo.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Tratta anche altri prodotti oltre alle banane?</h4>
+      <p>Sì. Le banane sono il prodotto di riferimento per molti esempi — perché è quello che conosco meglio — ma i principi di filiera, logistica, documentazione e pricing si applicano a qualsiasi frutta esotica: mango, avocado, ananas, frutto della passione e molto altro.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Il contenuto è aggiornato?</h4>
+      <p>Sì. I numeri su dazi, tempi di transito e costi logistici sono indicativi e soggetti a variazioni, ma la struttura operativa e le logiche commerciali descritte nella guida sono valide nel tempo. Gli aggiornamenti futuri sono inclusi nell'acquisto.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Posso ricevere una fattura?</h4>
+      <p>Sì, dopo l'acquisto puoi richiedere fattura via email. La guida è un prodotto digitale — nella maggior parte dei regimi fiscali è deducibile come spesa di formazione professionale.</p>
+    </div>
+    <div class="faq-item">
+      <h4>In che formato ricevo l'ebook?</h4>
+      <p>PDF scaricabile immediatamente dopo il pagamento. Leggibile su qualsiasi dispositivo — computer, tablet, smartphone. Ottimizzato per la lettura su schermo e per la stampa.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Posso contattare l'autore?</h4>
+      <p>Sì. Per domande specifiche sull'applicazione dei contenuti alla tua situazione puoi contattarmi direttamente. L'acquisto dell'ebook non include sessioni di consulenza, ma rispondo alle domande essenziali via email.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta">
+  <h2>Inizia adesso.</h2>
+  <p>Nel commercio internazionale le opportunità hanno una finestra temporale. Chi aspetta il momento perfetto aspetta per sempre.</p>
+  <a href="https://grottamass.gumroad.com/l/dtmpll" target="_blank" class="btn-primary">
+    Acquista l'ebook <span class="price" style="background: rgba(10,22,40,0.4); color: var(--electric);">€27</span>
+  </a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2025 Massimiliano Grotta — Tutti i diritti riservati</p>
+  <div style="display:flex; gap: 1.5rem;">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contatti</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
