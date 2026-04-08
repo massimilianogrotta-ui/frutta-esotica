@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exotic Fruit Worldwide — Massimiliano Grotta</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628; --ocean: #1A3A5C; --teal: #0D7377; --teal-light: #14A09E;
+    --electric: #14FFEC; --amber: #F5A623; --amber-light: #FFD080;
+    --off-white: #F4F6F0; --gray: #8892A4; --dark: #0D1117; --white: #FFFFFF;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--off-white); color:var(--dark); overflow-x:hidden; }
+
+  .hero { background:var(--navy); min-height:100vh; display:grid; grid-template-rows:auto 1fr auto; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(13,115,119,0.18) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(20,255,236,0.05) 0%, transparent 50%); pointer-events:none; }
+  .hero::after { content:''; position:absolute; inset:0; background-image: linear-gradient(rgba(13,115,119,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(13,115,119,0.06) 1px, transparent 1px); background-size:60px 60px; pointer-events:none; }
+
+  nav { display:flex; justify-content:space-between; align-items:center; padding:1.5rem 5%; position:relative; z-index:10; border-bottom:1px solid rgba(13,115,119,0.2); }
+  .nav-brand { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--white); letter-spacing:0.05em; }
+  .nav-brand span { color:var(--electric); }
+  .nav-cta { background:var(--teal); color:var(--white); padding:0.6rem 1.4rem; border-radius:4px; font-size:0.875rem; font-weight:500; text-decoration:none; transition:background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background:var(--teal-light); transform:translateY(-1px); }
+
+  .hero-content { display:flex; flex-direction:column; justify-content:center; padding:4rem 5% 3rem; position:relative; z-index:10; max-width:900px; }
+  .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(13,115,119,0.2); border:1px solid rgba(20,255,236,0.25); color:var(--electric); font-size:0.75rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; padding:0.4rem 1rem; border-radius:100px; margin-bottom:2rem; width:fit-content; animation:fadeInUp 0.6s ease both; }
+  .hero-badge::before { content:''; width:6px; height:6px; background:var(--electric); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  h1 { font-family:'Syne',sans-serif; font-size:clamp(3rem,7vw,5.5rem); font-weight:800; line-height:1.0; color:var(--white); margin-bottom:0.2rem; animation:fadeInUp 0.6s 0.1s ease both; }
+  h1 .accent { color:var(--electric); }
+  h1 .line3 { color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,0.4); }
+
+  .hero-subtitle { font-size:clamp(1rem,2vw,1.2rem); color:rgba(255,255,255,0.6); margin:1.5rem 0 0.75rem; font-weight:300; line-height:1.6; max-width:600px; animation:fadeInUp 0.6s 0.2s ease both; }
+  .hero-tagline { font-size:1rem; color:rgba(255,255,255,0.4); font-style:italic; margin-bottom:2.5rem; animation:fadeInUp 0.6s 0.25s ease both; }
+
+  .hero-actions { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; animation:fadeInUp 0.6s 0.3s ease both; }
+  .btn-primary { display:inline-flex; align-items:center; gap:0.75rem; background:var(--electric); color:var(--navy); font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; padding:1rem 2rem; border-radius:6px; text-decoration:none; transition:all 0.25s; box-shadow:0 0 30px rgba(20,255,236,0.25); }
+  .btn-primary:hover { background:var(--amber-light); transform:translateY(-2px); box-shadow:0 8px 40px rgba(20,255,236,0.3); }
+  .btn-primary .price { background:var(--navy); color:var(--electric); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.9rem; }
+  .btn-secondary { color:rgba(255,255,255,0.5); font-size:0.9rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem; transition:color 0.2s; }
+  .btn-secondary:hover { color:var(--white); }
+
+  .hero-proof { padding:2rem 5%; position:relative; z-index:10; display:flex; gap:2.5rem; border-top:1px solid rgba(255,255,255,0.06); flex-wrap:wrap; animation:fadeInUp 0.6s 0.4s ease both; }
+  .proof-item { display:flex; align-items:center; gap:0.6rem; }
+  .proof-num { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; color:var(--electric); line-height:1; }
+  .proof-label { font-size:0.78rem; color:var(--gray); line-height:1.3; max-width:90px; }
+  .proof-divider { width:1px; height:32px; background:rgba(255,255,255,0.1); align-self:center; }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  .author-strip { background:var(--ocean); padding:2.5rem 5%; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; }
+  .author-avatar { width:64px; height:64px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; color:var(--white); flex-shrink:0; border:2px solid var(--electric); }
+  .author-info h3 { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--white); margin-bottom:0.25rem; }
+  .author-info p { font-size:0.85rem; color:var(--gray); line-height:1.5; }
+  .author-badges { display:flex; gap:0.6rem; flex-wrap:wrap; margin-left:auto; }
+  .badge { background:rgba(13,115,119,0.25); border:1px solid rgba(13,115,119,0.5); color:var(--electric); font-size:0.75rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:100px; white-space:nowrap; }
+
+  section { padding:5rem 5%; }
+  .section-label { font-family:'Syne',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--teal); margin-bottom:1rem; }
+  h2 { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:1rem; }
+  h2 em { font-style:normal; color:var(--teal); }
+  .section-intro { font-size:1.05rem; color:#556; line-height:1.7; max-width:600px; margin-bottom:3rem; }
+
+  .problem { background:var(--navy); color:var(--white); }
+  .problem h2 { color:var(--white); }
+  .problem h2 em { color:var(--electric); }
+  .problem .section-intro { color:rgba(255,255,255,0.5); }
+  .problem-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-top:3rem; }
+  .problem-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem; position:relative; overflow:hidden; }
+  .problem-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--teal); }
+  .problem-card .icon { font-size:1.5rem; margin-bottom:0.75rem; }
+  .problem-card h4 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--white); margin-bottom:0.5rem; }
+  .problem-card p { font-size:0.875rem; color:rgba(255,255,255,0.45); line-height:1.6; }
+
+  .contents { background:var(--off-white); }
+  .chapters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.25rem; }
+  .chapter-card { background:var(--white); border-radius:8px; padding:1.5rem; border:1px solid rgba(0,0,0,0.06); transition:box-shadow 0.25s, transform 0.25s; position:relative; overflow:hidden; }
+  .chapter-card:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .chapter-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--teal),var(--electric)); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+  .chapter-card:hover::after { transform:scaleX(1); }
+  .chapter-num { font-family:'Syne',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem; }
+  .chapter-card h4 { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; color:var(--navy); margin-bottom:0.75rem; }
+  .chapter-bullets { list-style:none; display:flex; flex-direction:column; gap:0.35rem; }
+  .chapter-bullets li { font-size:0.85rem; color:#667; padding-left:1rem; position:relative; }
+  .chapter-bullets li::before { content:'▸'; position:absolute; left:0; color:var(--teal); font-size:0.7rem; top:1px; }
+
+  .for-whom { background:var(--white); }
+  .audience-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem; }
+  .audience-col h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:2px solid; }
+  .audience-col.yes h3 { color:var(--teal); border-color:var(--teal); }
+  .audience-col.no h3 { color:#cc4444; border-color:#cc4444; }
+  .audience-list { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+  .audience-list li { font-size:0.9rem; color:#445; display:flex; gap:0.6rem; align-items:flex-start; line-height:1.5; }
+  .audience-list li .check { flex-shrink:0; margin-top:2px; }
+  .yes .check { color:var(--teal); }
+  .no .check { color:#cc4444; }
+
+  .cases { background:var(--off-white); }
+  .cases-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-top:2.5rem; }
+  .case-card { background:var(--white); border-radius:8px; padding:1.75rem; border-left:4px solid var(--amber); box-shadow:0 2px 16px rgba(0,0,0,0.05); }
+  .case-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:0.6rem; }
+  .case-card h4 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:0.75rem; }
+  .case-card p { font-size:0.875rem; color:#556; line-height:1.65; }
+  .case-lesson { margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid rgba(0,0,0,0.06); font-size:0.8rem; color:var(--teal); font-weight:500; display:flex; gap:0.4rem; align-items:flex-start; }
+
+  .pricing { background:var(--navy); text-align:center; }
+  .pricing h2 { color:var(--white); }
+  .pricing h2 em { color:var(--electric); }
+  .price-card { max-width:480px; margin:3rem auto 0; background:rgba(255,255,255,0.04); border:1px solid rgba(20,255,236,0.2); border-radius:12px; padding:3rem 2.5rem; position:relative; overflow:hidden; }
+  .price-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--teal),var(--electric)); }
+  .price-label { font-size:0.8rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray); margin-bottom:0.5rem; }
+  .price-main { font-family:'Syne',sans-serif; font-size:5rem; font-weight:800; color:var(--white); line-height:1; margin-bottom:0.25rem; }
+  .price-main sup { font-size:2rem; vertical-align:top; margin-top:0.8rem; display:inline-block; color:var(--electric); }
+  .price-note { font-size:0.85rem; color:var(--gray); margin-bottom:2rem; }
+  .price-includes { list-style:none; text-align:left; display:flex; flex-direction:column; gap:0.7rem; margin-bottom:2rem; }
+  .price-includes li { display:flex; gap:0.75rem; align-items:flex-start; font-size:0.9rem; color:rgba(255,255,255,0.75); }
+  .price-includes li .tick { color:var(--electric); flex-shrink:0; margin-top:2px; }
+  .btn-buy { display:block; background:var(--electric); color:var(--navy); font-family:'Syne',sans-serif; font-weight:800; font-size:1.15rem; padding:1.1rem 2rem; border-radius:8px; text-decoration:none; transition:all 0.25s; box-shadow:0 0 40px rgba(20,255,236,0.2); margin-bottom:1rem; }
+  .btn-buy:hover { background:var(--amber-light); transform:translateY(-2px); }
+  .price-guarantee { font-size:0.8rem; color:rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; gap:0.4rem; }
+
+  .platform-tip { background:rgba(255,255,255,0.03); border:1px solid rgba(20,255,236,0.1); border-radius:8px; padding:1.5rem; margin-top:3rem; max-width:480px; margin-left:auto; margin-right:auto; text-align:left; }
+  .platform-tip h4 { font-family:'Syne',sans-serif; font-size:0.85rem; font-weight:700; color:var(--amber); margin-bottom:0.5rem; }
+  .platform-tip p { font-size:0.82rem; color:rgba(255,255,255,0.4); line-height:1.6; }
+  .platform-tip strong { color:rgba(255,255,255,0.7); }
+
+  .faq { background:var(--off-white); }
+  .faq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-top:2.5rem; }
+  .faq-item { background:var(--white); border-radius:8px; padding:1.5rem; border:1px solid rgba(0,0,0,0.06); }
+  .faq-item h4 { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:0.6rem; }
+  .faq-item p { font-size:0.875rem; color:#556; line-height:1.65; }
+
+  .final-cta { background:var(--teal); padding:5rem 5%; text-align:center; position:relative; overflow:hidden; }
+  .final-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(20,255,236,0.1) 0%, transparent 70%); }
+  .final-cta h2 { color:var(--white); font-size:clamp(1.8rem,4vw,3rem); margin-bottom:1rem; position:relative; }
+  .final-cta p { color:rgba(255,255,255,0.7); font-size:1.05rem; max-width:500px; margin:0 auto 2.5rem; line-height:1.7; position:relative; }
+  .final-cta .btn-primary { position:relative; margin:0 auto; }
+
+  footer { background:var(--dark); padding:2rem 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  footer p { font-size:0.8rem; color:rgba(255,255,255,0.25); }
+  footer a { color:rgba(255,255,255,0.3); text-decoration:none; font-size:0.8rem; transition:color 0.2s; }
+  footer a:hover { color:var(--electric); }
+
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  @media(max-width:640px) { .audience-grid{grid-template-columns:1fr} .hero-proof{gap:1.5rem} .author-badges{margin-left:0} h1{font-size:2.8rem} .price-main{font-size:4rem} }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <nav>
+    <div class="nav-brand">EXOTIC FRUIT <span>WORLDWIDE</span></div>
+    <a href="https://grottamass.gumroad.com/l/zzbjgw" target="_blank" class="nav-cta">Buy Now — €27</a>
+  </nav>
+  <div class="hero-content">
+    <div class="hero-badge">Practical Guide to International Fruit Trading</div>
+    <h1>
+      <span class="accent">EXOTIC</span><br>
+      FRUIT<br>
+      <span class="line3">WORLDWIDE</span>
+    </h1>
+    <p class="hero-subtitle">The practical guide to entering the international exotic and tropical fruit trade — written by someone who spent 10 years at Dole, traded across three continents and managed direct banana production in Ecuador.</p>
+    <p class="hero-tagline">From the first negotiation to delivery — everything you need to know to get started.</p>
+    <div class="hero-actions">
+      <a href="https://grottamass.gumroad.com/l/zzbjgw" target="_blank" class="btn-primary">Download the ebook <span class="price">€27</span></a>
+      <a href="#contents" class="btn-secondary">↓ See what's inside</a>
+    </div>
+  </div>
+  <div class="hero-proof">
+    <div class="proof-item"><div class="proof-num">10+</div><div class="proof-label">years at Dole Food Company</div></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><div class="proof-num">3</div><div class="proof-label">operational continents</div></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><div class="proof-num">6</div><div class="proof-label">operational chapters</div></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><div class="proof-num">100%</div><div class="proof-label">real field experience</div></div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<div class="author-strip reveal">
+  <div class="author-avatar">MG</div>
+  <div class="author-info">
+    <h3>Massimiliano Grotta</h3>
+    <p>Ex Dole Food Company · International Fruit Trader · Producer-Exporter Ecuador (Grobandeli)</p>
+  </div>
+  <div class="author-badges">
+    <span class="badge">Dole 2003–2013</span>
+    <span class="badge">Ecuador</span>
+    <span class="badge">Europe · Africa · Asia</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-label">The problem</div>
+  <h2>The sector is <em>complex</em>.<br>Practical information does not exist.</h2>
+  <p class="section-intro">Anyone who wants to enter international exotic fruit trade hits a wall: academic theory, expensive consultants, and no operational guide written by someone who actually does it.</p>
+  <div class="problem-grid">
+    <div class="problem-card reveal"><div class="icon">🔍</div><h4>Opaque supply chain</h4><p>Who does what, where margins form, how to enter — information you can only find after years in the field.</p></div>
+    <div class="problem-card reveal"><div class="icon">🌍</div><h4>Very different markets</h4><p>Africa, South America, Asia — each with completely different commercial logic, risks and dynamics.</p></div>
+    <div class="problem-card reveal"><div class="icon">📋</div><h4>Documentation minefield</h4><p>One wrong document blocks a container in customs. Demurrage and detention costs accumulate every single day.</p></div>
+    <div class="problem-card reveal"><div class="icon">💸</div><h4>Hidden costs everywhere</h4><p>Beginners calculate margin on buy and sell price only. Then the final invoice arrives and the margin disappears.</p></div>
+  </div>
+</section>
+
+<!-- CONTENTS -->
+<section class="contents" id="contents">
+  <div class="section-label">What's inside</div>
+  <h2>6 chapters. <em>Zero theory.</em><br>Only what you actually need.</h2>
+  <p class="section-intro">Every chapter is built on direct experience — real episodes, real numbers, lessons learned the hard way.</p>
+  <div class="chapters-grid">
+    <div class="chapter-card reveal"><div class="chapter-num">Introduction</div><h4>Who I am and why trust me</h4><ul class="chapter-bullets"><li>10 years at Dole Food Company</li><li>Trading across three continents</li><li>Direct banana production in Ecuador</li><li>The global market today: numbers and opportunities</li></ul></div>
+    <div class="chapter-card reveal"><div class="chapter-num">Chapter 1</div><h4>Understanding the Supply Chain</h4><ul class="chapter-bullets"><li>From field to table: the 5 key players</li><li>Where margins form — and where they are lost</li><li>The 3 realistic entry points for newcomers</li><li>How to choose your role in the chain</li></ul></div>
+    <div class="chapter-card reveal"><div class="chapter-num">Chapter 2</div><h4>Geographic Markets</h4><ul class="chapter-bullets"><li>South America: Ecuador, Colombia, Peru</li><li>Africa: real opportunities, concrete risks</li><li>Asia: high-value niche products</li><li>Europe: logistics hubs and sales channels</li></ul></div>
+    <div class="chapter-card reveal"><div class="chapter-num">Chapter 3</div><h4>Finding Suppliers and Buyers</h4><ul class="chapter-bullets"><li>The right trade fairs for each product and season</li><li>The AEBE Forum in Ecuador: what you need to know</li><li>How to evaluate a supplier before buying</li><li>Finding your first buyers in Europe</li></ul></div>
+    <div class="chapter-card reveal"><div class="chapter-num">Chapter 4</div><h4>Logistics and Documents</h4><ul class="chapter-bullets"><li>Reefer containers: temperatures and transit times</li><li>The 6 essential documents and how to manage them</li><li>Incoterms explained simply</li><li>The cold chain and the GPS thermograph</li></ul></div>
+    <div class="chapter-card reveal"><div class="chapter-num">Chapter 5</div><h4>Negotiation and Pricing</h4><ul class="chapter-bullets"><li>Demurrage and detention: what they are and what they cost</li><li>The complete pricing model with all real costs</li><li>Managing payment and currency risk</li><li>3 real case studies with operational lessons</li></ul></div>
+    <div class="chapter-card reveal"><div class="chapter-num">Chapter 6</div><h4>Getting Started Concretely</h4><ul class="chapter-bullets"><li>7 steps to organise your first operation</li><li>The 8 most common mistakes — and how to avoid them</li><li>Useful tools and resources to get started</li><li>Complete document checklist in the appendix</li></ul></div>
+    <div class="chapter-card reveal" style="border:1.5px solid var(--teal);background:linear-gradient(135deg,#f0fafa,#fff)"><div class="chapter-num" style="color:var(--amber)">Bonus</div><h4>Operational Appendix</h4><ul class="chapter-bullets"><li>Document checklist for every shipment</li><li>List of recommended tools and platforms</li><li>Transit time table by route</li><li>Complete step-by-step pricing model</li></ul></div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="for-whom reveal">
+  <div class="section-label">Who it's for</div>
+  <h2>This guide is <em>right for you</em><br>if you are in this situation.</h2>
+  <div class="audience-grid">
+    <div class="audience-col yes">
+      <h3>✓ It's for you if...</h3>
+      <ul class="audience-list">
+        <li><span class="check">✓</span> You want to enter the international exotic fruit trade</li>
+        <li><span class="check">✓</span> You already work in the sector and want to structure operations better</li>
+        <li><span class="check">✓</span> You are a trader, broker or importer just starting out</li>
+        <li><span class="check">✓</span> You want to understand how the supply chain works before investing</li>
+        <li><span class="check">✓</span> You have sector contacts you want to monetise</li>
+        <li><span class="check">✓</span> You need operational information — not academic theory</li>
+      </ul>
+    </div>
+    <div class="audience-col no">
+      <h3>✗ It's not for you if...</h3>
+      <ul class="audience-list">
+        <li><span class="check">✗</span> You are looking for a scheme to get rich without working</li>
+        <li><span class="check">✗</span> You are not willing to build relationships over time</li>
+        <li><span class="check">✗</span> You want a university textbook with abstract theory</li>
+        <li><span class="check">✗</span> You have no interest in understanding how logistics really works</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="cases">
+  <div class="section-label">From real practice</div>
+  <h2>Lessons you <em>won't find online.</em></h2>
+  <p class="section-intro">Real episodes lived in the field — with changed names but authentic dynamics and numbers.</p>
+  <div class="cases-grid">
+    <div class="case-card reveal"><div class="case-tag">📌 Case Study 1</div><h4>Port closed due to strike — Thessaloniki</h4><p>A banana container from Guayaquil heading to Thessaloniki. News of the port strike arrives when the vessel is already mid-Atlantic. No warning, no way to stop the shipment.</p><div class="case-lesson">→ How we diverted the shipment and recovered the margin thanks to a client network built over time.</div></div>
+    <div class="case-card reveal"><div class="case-tag">📌 Case Study 2</div><h4>The Ukraine war and the market collapse</h4><p>February 2022: prices collapsed and contracts cancelled overnight across Eastern Europe. Goods in transit, client communicating they can no longer take the shipment.</p><div class="case-lesson">→ The strategy we developed to protect ourselves: limited volumes and advance payments during high-risk periods.</div></div>
+    <div class="case-card reveal"><div class="case-tag">📌 Case Study 3</div><h4>The client who does not pay — and what to do</h4><p>Market price collapses. The client becomes unreachable. The goods have already arrived at port and every day generates demurrage, deterioration and real losses.</p><div class="case-lesson">→ The operational rule I learned: activate plan B immediately. Time is always against you in fresh fruit trading.</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="buy">
+  <div class="section-label" style="color:var(--teal-light)">Buy</div>
+  <h2>A <em>€27</em> investment.<br>A map for a billion-dollar sector.</h2>
+  <div class="price-card reveal">
+    <div class="price-label">Instant access · Downloadable PDF</div>
+    <div class="price-main"><sup>€</sup>27</div>
+    <div class="price-note">One-time payment · No subscription</div>
+    <ul class="price-includes">
+      <li><span class="tick">✓</span> Complete PDF guide — 6 chapters + appendix</li>
+      <li><span class="tick">✓</span> Complete pricing model with all real costs</li>
+      <li><span class="tick">✓</span> Document checklist for every operation</li>
+      <li><span class="tick">✓</span> Transit time table by route</li>
+      <li><span class="tick">✓</span> 3 real case studies with operational lessons</li>
+      <li><span class="tick">✓</span> Future updates included</li>
+    </ul>
+    <a href="https://grottamass.gumroad.com/l/zzbjgw" target="_blank" class="btn-buy">Buy now — €27 →</a>
+    <div class="price-guarantee">🔒 Secure payment · Instant download</div>
+  </div>
+
+</section>
+
+<!-- FAQ -->
+<section class="faq reveal">
+  <div class="section-label">FAQ</div>
+  <h2>Still have <em>questions?</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item"><h4>Do I need to already work in the sector?</h4><p>No. The guide is structured to be useful both to those starting from scratch and to those with some experience. The early chapters build the foundations; later chapters cover operational details that even professionals often handle poorly.</p></div>
+    <div class="faq-item"><h4>Does it cover products other than bananas?</h4><p>Yes. Bananas are the reference product for many examples — because it is what the author knows best — but the supply chain, logistics, documentation and pricing principles apply to any exotic fruit: mango, avocado, pineapple, passion fruit and more.</p></div>
+    <div class="faq-item"><h4>Is the content up to date?</h4><p>Yes. Duty rates, transit times and logistics costs are indicative and subject to change, but the operational structure and commercial logic described in the guide are timeless. Future updates are included with purchase.</p></div>
+    <div class="faq-item"><h4>Can I get an invoice?</h4><p>Yes, after purchase you can request an invoice by email. The guide is a digital product — in most tax regimes it is deductible as a professional training expense.</p></div>
+    <div class="faq-item"><h4>What format will I receive?</h4><p>Downloadable PDF, immediately after payment. Readable on any device — computer, tablet, smartphone. Optimised for both screen reading and printing.</p></div>
+    <div class="faq-item"><h4>Can I contact the author?</h4><p>Yes. For specific questions about applying the content to your situation you can contact the author directly. Purchase does not include consulting sessions, but essential questions are answered by email.</p></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Start now.</h2>
+  <p>In international trade, opportunities have a time window. Those who wait for the perfect moment wait forever.</p>
+  <a href="https://grottamass.gumroad.com/l/zzbjgw" target="_blank" class="btn-primary">Buy the ebook <span class="price" style="background:rgba(10,22,40,0.4);color:var(--electric)">€27</span></a>
+</section>
+
+<footer>
+  <p>© 2025 Massimiliano Grotta — All rights reserved</p>
+  <div style="display:flex;gap:1.5rem"><a href="#">Privacy Policy</a><a href="#">Contact</a></div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
